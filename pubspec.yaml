@@ -1,0 +1,46 @@
+name: swastik
+description: "Swastik Caterers"
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  get: ^4.7.1
+  cloud_firestore: ^5.6.3
+  firebase_core: ^3.11.0
+  flutter_screenutil: ^5.9.3
+  custom_refresh_indicator: ^4.0.1
+  flutter_slidable: ^3.1.2
+  readmore: ^3.0.0
+  printing: ^5.14.2
+  pdf: ^3.11.3
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+flutter:
+
+  uses-material-design: true
+  assets:
+   - assets/images/
+
+  fonts:
+    - family: Atkinson
+      fonts:
+        - asset: assets/font/AtkinsonHyperlegibleNext-Regular.ttf
+        - asset: assets/font/AtkinsonHyperlegibleNext-Medium.ttf
+        - asset: assets/font/AtkinsonHyperlegibleNext-SemiBold.ttf
+        - asset: assets/font/AtkinsonHyperlegibleNext-Bold.ttf
+
+
