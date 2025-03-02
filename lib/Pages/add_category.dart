@@ -93,7 +93,8 @@ class _AddCategoryState extends State<AddCategory> {
               ? Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
                     child: const CircularProgressIndicator(),
                   ),
                 )
@@ -101,22 +102,58 @@ class _AddCategoryState extends State<AddCategory> {
                   onTap: () async {
                     FocusScope.of(context).unfocus();
                     if (controller.categoryName.text.isEmpty) {
-                      AppSnackbar.errorSnackbar(context, "Please add category name");
+                      AppSnackbar.errorSnackbar(
+                          context, "Please add category name");
                     } else {
                       if (widget.isUpdate) {
-                        await controller.updateCategory(widget.categoryModel?.id ?? "").then(
+                        if (widget.categoryModel?.name
+                                    .toString()
+                                    .toLowerCase()
+                                    .trim() !=
+                                controller.categoryName.text
+                                    .toString()
+                                    .toLowerCase()
+                                    .trim() &&
+                            controller.categories.any((element) =>
+                                element.name!.toLowerCase().toString().trim() ==
+                                controller.categoryName.text
+                                    .toString()
+                                    .toLowerCase()
+                                    .trim())) {
+                          if (!context.mounted) return;
+                          AppSnackbar.errorSnackbar(context,
+                              "${controller.categoryName.text.trim()} category already exist");
+                          return;
+                        }
+
+                        await controller
+                            .updateCategory(widget.categoryModel?.id ?? "")
+                            .then(
                           (value) {
                             if (value) {
                               if (!context.mounted) return;
-                              AppSnackbar.snackbar(context, "Category name updated.");
+                              AppSnackbar.snackbar(
+                                  context, "Category name updated.");
                               Get.back();
                             } else {
                               if (!context.mounted) return;
-                              AppSnackbar.errorSnackbar(context, "Something went wrong please try again!");
+                              AppSnackbar.errorSnackbar(context,
+                                  "Something went wrong please try again!");
                             }
                           },
                         );
                       } else {
+                        if (controller.categories.any((element) =>
+                            element.name!.toLowerCase().toString().trim() ==
+                            controller.categoryName.text
+                                .toString()
+                                .toLowerCase()
+                                .trim())) {
+                          if (!context.mounted) return;
+                          AppSnackbar.errorSnackbar(context,
+                              "${controller.categoryName.text.trim()} category already exist");
+                          return;
+                        }
                         await controller.addCategory().then(
                           (value) async {
                             if (value) {
@@ -127,20 +164,26 @@ class _AddCategoryState extends State<AddCategory> {
                                 context: context,
                                 builder: (c1) {
                                   return Dialog(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.r)),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.r)),
                                     child: IntrinsicHeight(
                                       child: Column(
                                         children: [
                                           Align(
                                             alignment: Alignment.topRight,
                                             child: Padding(
-                                              padding: EdgeInsets.only(right: 15.w, top: 15.h, bottom: 5.h),
+                                              padding: EdgeInsets.only(
+                                                  right: 15.w,
+                                                  top: 15.h,
+                                                  bottom: 5.h),
                                               child: GestureDetector(
                                                 onTap: () {
                                                   Navigator.pop(c1);
                                                   Get.back();
                                                 },
-                                                child: const Icon(Icons.cancel_outlined),
+                                                child: const Icon(
+                                                    Icons.cancel_outlined),
                                               ),
                                             ),
                                           ),
@@ -152,7 +195,9 @@ class _AddCategoryState extends State<AddCategory> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 15.w,
+                                                vertical: 15.h),
                                             child: Text(
                                               textAlign: TextAlign.center,
                                               "Would you like to add items to this category now?",
@@ -167,19 +212,25 @@ class _AddCategoryState extends State<AddCategory> {
                                                   () => const AddItem(
                                                         isUpdate: false,
                                                       ),
-                                                  transition: Transition.rightToLeft);
+                                                  transition:
+                                                      Transition.rightToLeft);
                                             },
                                             child: Container(
-                                              margin: EdgeInsets.symmetric(horizontal: 16.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 16.w),
                                               height: 55.h,
                                               decoration: BoxDecoration(
                                                 color: AppColors.primaryColor,
-                                                borderRadius: BorderRadius.circular(5.r),
+                                                borderRadius:
+                                                    BorderRadius.circular(5.r),
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "Add Items",
-                                                  style: TextStyle(color: AppColors.whiteColor, fontSize: 20.sp),
+                                                  style: TextStyle(
+                                                      color:
+                                                          AppColors.whiteColor,
+                                                      fontSize: 20.sp),
                                                 ),
                                               ),
                                             ),
@@ -193,7 +244,8 @@ class _AddCategoryState extends State<AddCategory> {
                               );
                             } else {
                               if (!context.mounted) return;
-                              AppSnackbar.errorSnackbar(context, "Something went wrong please try again!");
+                              AppSnackbar.errorSnackbar(context,
+                                  "Something went wrong please try again!");
                             }
                           },
                         );
@@ -201,7 +253,8 @@ class _AddCategoryState extends State<AddCategory> {
                     }
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                    margin:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
                     height: 55.h,
                     decoration: BoxDecoration(
                       color: AppColors.primaryColor,
@@ -210,7 +263,8 @@ class _AddCategoryState extends State<AddCategory> {
                     child: Center(
                       child: Text(
                         widget.isUpdate ? "Update Category" : "Add Category",
-                        style: TextStyle(color: AppColors.whiteColor, fontSize: 20.sp),
+                        style: TextStyle(
+                            color: AppColors.whiteColor, fontSize: 20.sp),
                       ),
                     ),
                   ),

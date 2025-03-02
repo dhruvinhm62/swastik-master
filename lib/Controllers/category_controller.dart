@@ -45,7 +45,7 @@ class CategoryController extends GetxController {
       await AppDataBase().kCategoriesCollection.doc(categoryDoc.id).set(data);
       loader = false;
       update();
-      fetchCategories();
+      await fetchCategories();
       return true;
     } catch (error) {
       log("===ADD=CATEGORY=ERROR:::::::::::::::$error");
@@ -82,7 +82,7 @@ class CategoryController extends GetxController {
           .update(updatedData);
       loader = false;
       update();
-      fetchCategories();
+      await fetchCategories();
       Get.find<ItemController>().fetchItems();
       return true;
     } catch (error) {

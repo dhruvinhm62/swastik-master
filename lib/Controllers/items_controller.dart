@@ -268,7 +268,7 @@ class ItemController extends GetxController {
       await AppDataBase().kItemsCollection.doc(itemDoc.id).set(data);
       loader = false;
       update();
-      fetchItems();
+      await fetchItems();
       return true;
     } catch (error) {
       log("===ADD=ITEM=ERROR:::::::::::::::$error");

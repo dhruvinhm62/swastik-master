@@ -13,7 +13,8 @@ class AddItem extends StatefulWidget {
   final bool isUpdate;
   final ItemModel? itemModel;
   final CategoryModel? categoryModel;
-  const AddItem({super.key, required this.isUpdate, this.itemModel, this.categoryModel});
+  const AddItem(
+      {super.key, required this.isUpdate, this.itemModel, this.categoryModel});
 
   @override
   State<AddItem> createState() => _AddItemState();
@@ -90,13 +91,16 @@ class _AddItemState extends State<AddItem> {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 20.h),
-                      child: GetBuilder<CategoryController>(builder: (controller) {
+                      child:
+                          GetBuilder<CategoryController>(builder: (controller) {
                         return AppTextfield(
                           onTap: () async {
                             await selectCategoryDialog(context, controller);
                           },
                           labelTextName: "Category",
-                          hintTextName: itemController.selectedCategoryForFrom?.name ?? "Select category",
+                          hintTextName:
+                              itemController.selectedCategoryForFrom?.name ??
+                                  "Select category",
                           minLine: 1,
                           maxLine: 3,
                           isReadOnly: true,
@@ -146,30 +150,71 @@ class _AddItemState extends State<AddItem> {
               ? Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
                     child: const CircularProgressIndicator(),
                   ),
                 )
               : GestureDetector(
                   onTap: () async {
                     FocusScope.of(context).unfocus();
-                    if (controller.itemName.text.isEmpty) {
-                      AppSnackbar.errorSnackbar(context, "Please add item name");
+                    if (controller.selectedCategoryForFrom == null) {
+                      AppSnackbar.errorSnackbar(
+                          context, "Please select category");
+                    } else if (controller.itemName.text.isEmpty) {
+                      AppSnackbar.errorSnackbar(
+                          context, "Please add item name");
                     } else {
                       if (widget.isUpdate) {
-                        await controller.updateItem(widget.itemModel?.id ?? "").then(
+                        if (widget.itemModel?.name
+                                    .toString()
+                                    .toLowerCase()
+                                    .trim() !=
+                                controller.itemName.text
+                                    .toString()
+                                    .toLowerCase()
+                                    .trim() &&
+                            controller.items.any((element) =>
+                                element.name!.toLowerCase().toString().trim() ==
+                                controller.itemName.text
+                                    .toString()
+                                    .toLowerCase()
+                                    .trim())) {
+                          if (!context.mounted) return;
+                          AppSnackbar.errorSnackbar(context,
+                              "${controller.itemName.text.trim()} item already exist");
+                          return;
+                        }
+
+                        await controller
+                            .updateItem(widget.itemModel?.id ?? "")
+                            .then(
                           (value) {
                             if (value) {
                               if (!context.mounted) return;
-                              AppSnackbar.snackbar(context, "Item details updated.");
+                              AppSnackbar.snackbar(
+                                  context, "Item details updated.");
                               Get.back();
                             } else {
                               if (!context.mounted) return;
-                              AppSnackbar.errorSnackbar(context, "Something went wrong please try again!");
+                              AppSnackbar.errorSnackbar(context,
+                                  "Something went wrong please try again!");
                             }
                           },
                         );
                       } else {
+                        if (controller.items.any((element) =>
+                            element.name!.toLowerCase().toString().trim() ==
+                            controller.itemName.text
+                                .toString()
+                                .toLowerCase()
+                                .trim())) {
+                          if (!context.mounted) return;
+                          AppSnackbar.errorSnackbar(context,
+                              "${controller.itemName.text.trim()} item already exist");
+                          return;
+                        }
+
                         await controller.addItem().then(
                           (value) async {
                             if (value) {
@@ -184,20 +229,26 @@ class _AddItemState extends State<AddItem> {
                                 context: context,
                                 builder: (c1) {
                                   return Dialog(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.r)),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.r)),
                                     child: IntrinsicHeight(
                                       child: Column(
                                         children: [
                                           Align(
                                             alignment: Alignment.topRight,
                                             child: Padding(
-                                              padding: EdgeInsets.only(right: 15.w, top: 15.h, bottom: 5.h),
+                                              padding: EdgeInsets.only(
+                                                  right: 15.w,
+                                                  top: 15.h,
+                                                  bottom: 5.h),
                                               child: GestureDetector(
                                                 onTap: () {
                                                   Navigator.pop(c1);
                                                   Get.back();
                                                 },
-                                                child: const Icon(Icons.cancel_outlined),
+                                                child: const Icon(
+                                                    Icons.cancel_outlined),
                                               ),
                                             ),
                                           ),
@@ -209,7 +260,9 @@ class _AddItemState extends State<AddItem> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 15.w,
+                                                vertical: 15.h),
                                             child: Text(
                                               textAlign: TextAlign.center,
                                               "Would you like to add another item now?",
@@ -221,16 +274,21 @@ class _AddItemState extends State<AddItem> {
                                               Navigator.pop(c1);
                                             },
                                             child: Container(
-                                              margin: EdgeInsets.symmetric(horizontal: 16.w),
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 16.w),
                                               height: 55.h,
                                               decoration: BoxDecoration(
                                                 color: AppColors.primaryColor,
-                                                borderRadius: BorderRadius.circular(5.r),
+                                                borderRadius:
+                                                    BorderRadius.circular(5.r),
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   "Add Item",
-                                                  style: TextStyle(color: AppColors.whiteColor, fontSize: 20.sp),
+                                                  style: TextStyle(
+                                                      color:
+                                                          AppColors.whiteColor,
+                                                      fontSize: 20.sp),
                                                 ),
                                               ),
                                             ),
@@ -244,7 +302,8 @@ class _AddItemState extends State<AddItem> {
                               );
                             } else {
                               if (!context.mounted) return;
-                              AppSnackbar.errorSnackbar(context, "Something went wrong please try again!");
+                              AppSnackbar.errorSnackbar(context,
+                                  "Something went wrong please try again!");
                             }
                           },
                         );
@@ -252,7 +311,8 @@ class _AddItemState extends State<AddItem> {
                     }
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                    margin:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
                     height: 55.h,
                     decoration: BoxDecoration(
                       color: AppColors.primaryColor,
@@ -261,7 +321,8 @@ class _AddItemState extends State<AddItem> {
                     child: Center(
                       child: Text(
                         widget.isUpdate ? "Update Item" : "Add Item",
-                        style: TextStyle(color: AppColors.whiteColor, fontSize: 20.sp),
+                        style: TextStyle(
+                            color: AppColors.whiteColor, fontSize: 20.sp),
                       ),
                     ),
                   ),
@@ -271,14 +332,16 @@ class _AddItemState extends State<AddItem> {
     );
   }
 
-  Future<dynamic> selectCategoryDialog(BuildContext context, CategoryController controller) async {
+  Future<dynamic> selectCategoryDialog(
+      BuildContext context, CategoryController controller) async {
     return await showDialog(
       context: context,
       builder: (c1) {
         return GetBuilder<ItemController>(
           builder: (itemController) {
             return Dialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0)),
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxHeight: 550.h),
                 child: Column(
@@ -323,7 +386,10 @@ class _AddItemState extends State<AddItem> {
                                 .toString()
                                 .trim()
                                 .toLowerCase()
-                                .contains(itemController.searchController.text.toString().trim().toLowerCase()),
+                                .contains(itemController.searchController.text
+                                    .toString()
+                                    .trim()
+                                    .toLowerCase()),
                           );
 
                           return index < 0 || controller.categories.isEmpty
@@ -337,18 +403,30 @@ class _AddItemState extends State<AddItem> {
                                                 .toString()
                                                 .trim()
                                                 .toLowerCase()
-                                                .contains(itemController.searchController.text.toString().trim().toLowerCase()) ||
-                                            itemController.searchController.text.isEmpty
+                                                .contains(itemController
+                                                    .searchController.text
+                                                    .toString()
+                                                    .trim()
+                                                    .toLowerCase()) ||
+                                            itemController
+                                                .searchController.text.isEmpty
                                         ? Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 10.w).copyWith(bottom: 10.h),
+                                            padding: EdgeInsets.symmetric(
+                                                    horizontal: 10.w)
+                                                .copyWith(bottom: 10.h),
                                             child: ListTile(
                                               onTap: () {
-                                                itemController.updateSelectedCategoryForForm(controller.categories[index]);
+                                                itemController
+                                                    .updateSelectedCategoryForForm(
+                                                        controller
+                                                            .categories[index]);
                                                 Navigator.pop(c1);
                                                 setState(() {});
                                               },
-                                              tileColor: AppColors.primaryColor.withOpacity(0.12),
-                                              title: Text("${controller.categories[index].name}"),
+                                              tileColor: AppColors.primaryColor
+                                                  .withOpacity(0.12),
+                                              title: Text(
+                                                  "${controller.categories[index].name}"),
                                             ),
                                           )
                                         : const SizedBox();
