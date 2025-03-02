@@ -106,19 +106,18 @@ class ItemController extends GetxController {
     selectedItems = items
         .where((element) => model.selectedItems!.contains(element.id))
         .toList();
+    reorderList();
     update();
   }
 
   TimeOfDay? parseTimeOfDay(String timeString) {
     try {
-      timeString = timeString
-          .trim()
-          .replaceAll('\u202F', ''); // Removes non-breaking spaces
-      final DateFormat format = DateFormat("h:mm a"); // Explicit format
+      timeString = timeString.trim().replaceAll('\u202F', '');
+      final DateFormat format = DateFormat("h:mm a");
       final DateTime dateTime = format.parse(timeString);
       return TimeOfDay(hour: dateTime.hour, minute: dateTime.minute);
     } catch (e) {
-      print("Error parsing time: $e");
+      log("Error parsing time: $e");
       return null;
     }
   }
@@ -214,6 +213,12 @@ class ItemController extends GetxController {
     afternoonTime1 = TimeOfDay.now();
     eveningTime1 = TimeOfDay.now();
     selectionModeId = null;
+    update();
+  }
+
+  reorderList() {
+    selectedItems
+        .sort((a, b) => (a.categoryName ?? "").compareTo(b.categoryName ?? ""));
     update();
   }
 

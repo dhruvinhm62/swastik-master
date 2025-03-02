@@ -210,12 +210,48 @@ class _PdfViewState extends State<PdfView> {
                                               child: controller.selectedItems
                                                           .length >
                                                       index
-                                                  ? pw.Center(
-                                                      child: pw.Text(controller
-                                                              .selectedItems[
-                                                                  index]
-                                                              .name ??
-                                                          ""),
+                                                  ? pw.Row(
+                                                      children: [
+                                                        pw.Padding(
+                                                          padding: const pw
+                                                              .EdgeInsets.only(
+                                                              left: 15),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                              "${controller.selectedItems[index].categoryName} : ",
+                                                              maxLines: 1,
+                                                              style:
+                                                                  pw.TextStyle(
+                                                                color: index ==
+                                                                            0 ||
+                                                                        (index >
+                                                                                0 &&
+                                                                            controller.selectedItems[index].categoryName !=
+                                                                                controller.selectedItems[index - 1].categoryName)
+                                                                    ? PdfColors.black
+                                                                    : PdfColors.white,
+                                                                fontWeight: pw
+                                                                    .FontWeight
+                                                                    .bold,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        pw.Padding(
+                                                          padding: const pw
+                                                              .EdgeInsets.only(
+                                                              right: 20),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                controller
+                                                                        .selectedItems[
+                                                                            index]
+                                                                        .name ??
+                                                                    "",
+                                                                maxLines: 1),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     )
                                                   : pw.SizedBox(),
                                             );
@@ -250,12 +286,48 @@ class _PdfViewState extends State<PdfView> {
                                               child: controller.selectedItems
                                                           .length >
                                                       (index + 17)
-                                                  ? pw.Center(
-                                                      child: pw.Text(controller
-                                                              .selectedItems[
-                                                                  (index + 17)]
-                                                              .name ??
-                                                          ""),
+                                                  ? pw.Row(
+                                                      children: [
+                                                        pw.Padding(
+                                                          padding: const pw
+                                                              .EdgeInsets.only(
+                                                              left: 15),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                              "${controller.selectedItems[(index + 17)].categoryName} : ",
+                                                              maxLines: 1,
+                                                              style:
+                                                                  pw.TextStyle(
+                                                                color: index ==
+                                                                            0 ||
+                                                                        (index >
+                                                                                0 &&
+                                                                            controller.selectedItems[(index + 17)].categoryName !=
+                                                                                controller.selectedItems[(index + 17) - 1].categoryName)
+                                                                    ? PdfColors.black
+                                                                    : PdfColors.white,
+                                                                fontWeight: pw
+                                                                    .FontWeight
+                                                                    .bold,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        pw.Padding(
+                                                          padding: const pw
+                                                              .EdgeInsets.only(
+                                                              right: 20),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                controller
+                                                                        .selectedItems[(index +
+                                                                            17)]
+                                                                        .name ??
+                                                                    "",
+                                                                maxLines: 1),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     )
                                                   : pw.SizedBox(),
                                             );
@@ -477,11 +549,46 @@ class _PdfViewState extends State<PdfView> {
                                           child: controller
                                                       .selectedItems.length >
                                                   index
-                                              ? pw.Center(
-                                                  child: pw.Text(controller
-                                                          .selectedItems[index]
-                                                          .name ??
-                                                      ""),
+                                              ? pw.Row(
+                                                  children: [
+                                                    pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          left: 15),
+                                                      child: pw.Center(
+                                                        child: pw.Text(
+                                                          "${controller.selectedItems[index].categoryName} : ",
+                                                          maxLines: 1,
+                                                          style: pw.TextStyle(
+                                                            color: index == 0 ||
+                                                                    (index >
+                                                                            0 &&
+                                                                        controller.selectedItems[index].categoryName !=
+                                                                            controller.selectedItems[index - 1].categoryName)
+                                                                ? PdfColors.black
+                                                                : PdfColors.white,
+                                                            fontWeight: pw
+                                                                .FontWeight
+                                                                .bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          right: 20),
+                                                      child: pw.Center(
+                                                        child: pw.Text(
+                                                            controller
+                                                                    .selectedItems[
+                                                                        index]
+                                                                    .name ??
+                                                                "",
+                                                            maxLines: 1),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 )
                                               : pw.SizedBox(),
                                         );
@@ -512,17 +619,52 @@ class _PdfViewState extends State<PdfView> {
                                       itemBuilder: (context, index) {
                                         return pw.Container(
                                           height: 24.8,
-                                          child:
-                                              controller.selectedItems.length >
-                                                      (index + 21)
-                                                  ? pw.Center(
-                                                      child: pw.Text(controller
-                                                              .selectedItems[
-                                                                  (index + 21)]
-                                                              .name ??
-                                                          ""),
-                                                    )
-                                                  : pw.SizedBox(),
+                                          child: controller
+                                                      .selectedItems.length >
+                                                  (index + 21)
+                                              ? pw.Row(
+                                                  children: [
+                                                    pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          left: 15),
+                                                      child: pw.Center(
+                                                        child: pw.Text(
+                                                          "${controller.selectedItems[(index + 21)].categoryName} : ",
+                                                          maxLines: 1,
+                                                          style: pw.TextStyle(
+                                                            color: index == 0 ||
+                                                                    (index >
+                                                                            0 &&
+                                                                        controller.selectedItems[(index + 21)].categoryName !=
+                                                                            controller.selectedItems[(index + 21) - 1].categoryName)
+                                                                ? PdfColors.black
+                                                                : PdfColors.white,
+                                                            fontWeight: pw
+                                                                .FontWeight
+                                                                .bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    pw.Padding(
+                                                      padding: const pw
+                                                          .EdgeInsets.only(
+                                                          right: 20),
+                                                      child: pw.Center(
+                                                        child: pw.Text(
+                                                            controller
+                                                                    .selectedItems[
+                                                                        (index +
+                                                                            21)]
+                                                                    .name ??
+                                                                "",
+                                                            maxLines: 1),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : pw.SizedBox(),
                                         );
                                       },
                                     ),
@@ -542,7 +684,7 @@ class _PdfViewState extends State<PdfView> {
         ),
       );
 
-      if (controller.selectedItems.length > 108) {
+      if (controller.selectedItems.length > 96) {
         pdf.addPage(
           pw.MultiPage(
             orientation: pw.PageOrientation.portrait,
@@ -627,13 +769,49 @@ class _PdfViewState extends State<PdfView> {
                                             height: 24.8,
                                             child: controller
                                                         .selectedItems.length >
-                                                    (index + 81)
-                                                ? pw.Center(
-                                                    child: pw.Text(controller
-                                                            .selectedItems[
-                                                                (index + 81)]
-                                                            .name ??
-                                                        ""),
+                                                    (index + 42)
+                                                ? pw.Row(
+                                                    children: [
+                                                      pw.Padding(
+                                                        padding: const pw
+                                                            .EdgeInsets.only(
+                                                            left: 15),
+                                                        child: pw.Center(
+                                                          child: pw.Text(
+                                                            "${controller.selectedItems[(index + 42)].categoryName} : ",
+                                                            maxLines: 1,
+                                                            style: pw.TextStyle(
+                                                              color: index ==
+                                                                          0 ||
+                                                                      (index >
+                                                                              0 &&
+                                                                          controller.selectedItems[(index + 42)].categoryName !=
+                                                                              controller.selectedItems[(index + 42) - 1].categoryName)
+                                                                  ? PdfColors.black
+                                                                  : PdfColors.white,
+                                                              fontWeight: pw
+                                                                  .FontWeight
+                                                                  .bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      pw.Padding(
+                                                        padding: const pw
+                                                            .EdgeInsets.only(
+                                                            right: 20),
+                                                        child: pw.Center(
+                                                          child: pw.Text(
+                                                              controller
+                                                                      .selectedItems[
+                                                                          (index +
+                                                                              42)]
+                                                                      .name ??
+                                                                  "",
+                                                              maxLines: 1),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   )
                                                 : pw.SizedBox(),
                                           );
@@ -667,13 +845,49 @@ class _PdfViewState extends State<PdfView> {
                                             height: 24.8,
                                             child: controller
                                                         .selectedItems.length >
-                                                    (index + 85)
-                                                ? pw.Center(
-                                                    child: pw.Text(controller
-                                                            .selectedItems[
-                                                                (index + 85)]
-                                                            .name ??
-                                                        ""),
+                                                    (index + 73)
+                                                ? pw.Row(
+                                                    children: [
+                                                      pw.Padding(
+                                                        padding: const pw
+                                                            .EdgeInsets.only(
+                                                            left: 15),
+                                                        child: pw.Center(
+                                                          child: pw.Text(
+                                                            "${controller.selectedItems[(index + 73)].categoryName} : ",
+                                                            maxLines: 1,
+                                                            style: pw.TextStyle(
+                                                              color: index ==
+                                                                          0 ||
+                                                                      (index >
+                                                                              0 &&
+                                                                          controller.selectedItems[(index + 73)].categoryName !=
+                                                                              controller.selectedItems[(index + 73) - 1].categoryName)
+                                                                  ? PdfColors.black
+                                                                  : PdfColors.white,
+                                                              fontWeight: pw
+                                                                  .FontWeight
+                                                                  .bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      pw.Padding(
+                                                        padding: const pw
+                                                            .EdgeInsets.only(
+                                                            right: 20),
+                                                        child: pw.Center(
+                                                          child: pw.Text(
+                                                              controller
+                                                                      .selectedItems[
+                                                                          (index +
+                                                                              73)]
+                                                                      .name ??
+                                                                  "",
+                                                              maxLines: 1),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   )
                                                 : pw.SizedBox(),
                                           );
@@ -785,19 +999,53 @@ class _PdfViewState extends State<PdfView> {
                                                       (index +
                                                           (controller.selectedItems
                                                                       .length >
-                                                                  108
-                                                              ? 116
-                                                              : 54))
-                                                  ? pw.Center(
-                                                      child: pw.Text(controller
-                                                              .selectedItems[(index +
-                                                                  (controller.selectedItems
-                                                                              .length >
-                                                                          108
-                                                                      ? 116
-                                                                      : 54))]
-                                                              .name ??
-                                                          ""),
+                                                                  96
+                                                              ? 104
+                                                              : 43))
+                                                  ? pw.Row(
+                                                      children: [
+                                                        pw.Padding(
+                                                          padding: const pw
+                                                              .EdgeInsets.only(
+                                                              left: 15),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                              "${controller.selectedItems[(index + (controller.selectedItems.length > 96 ? 104 : 43))].categoryName} : ",
+                                                              maxLines: 1,
+                                                              style:
+                                                                  pw.TextStyle(
+                                                                color: index ==
+                                                                            0 ||
+                                                                        (index >
+                                                                                0 &&
+                                                                            controller.selectedItems[(index + (controller.selectedItems.length > 96 ? 104 : 43))].categoryName !=
+                                                                                controller.selectedItems[(index + (controller.selectedItems.length > 96 ? 104 : 43)) - 1].categoryName)
+                                                                    ? PdfColors.black
+                                                                    : PdfColors.white,
+                                                                fontWeight: pw
+                                                                    .FontWeight
+                                                                    .bold,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        pw.Padding(
+                                                          padding: const pw
+                                                              .EdgeInsets.only(
+                                                              right: 20),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                controller
+                                                                        .selectedItems[(index +
+                                                                            (controller.selectedItems.length > 96
+                                                                                ? 104
+                                                                                : 43))]
+                                                                        .name ??
+                                                                    "",
+                                                                maxLines: 1),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     )
                                                   : pw.SizedBox(),
                                             );
@@ -834,19 +1082,53 @@ class _PdfViewState extends State<PdfView> {
                                                       (index +
                                                           (controller.selectedItems
                                                                       .length >
-                                                                  108
-                                                              ? 143
-                                                              : 54))
-                                                  ? pw.Center(
-                                                      child: pw.Text(controller
-                                                              .selectedItems[(index +
-                                                                  (controller.selectedItems
-                                                                              .length >
-                                                                          108
-                                                                      ? 143
-                                                                      : 54))]
-                                                              .name ??
-                                                          ""),
+                                                                  96
+                                                              ? 131
+                                                              : 70))
+                                                  ? pw.Row(
+                                                      children: [
+                                                        pw.Padding(
+                                                          padding: const pw
+                                                              .EdgeInsets.only(
+                                                              left: 15),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                              "${controller.selectedItems[(index + (controller.selectedItems.length > 96 ? 131 : 70))].categoryName} : ",
+                                                              maxLines: 1,
+                                                              style:
+                                                                  pw.TextStyle(
+                                                                color: index ==
+                                                                            0 ||
+                                                                        (index >
+                                                                                0 &&
+                                                                            controller.selectedItems[(index + (controller.selectedItems.length > 96 ? 131 : 70))].categoryName !=
+                                                                                controller.selectedItems[(index + (controller.selectedItems.length > 96 ? 131 : 70)) - 1].categoryName)
+                                                                    ? PdfColors.black
+                                                                    : PdfColors.white,
+                                                                fontWeight: pw
+                                                                    .FontWeight
+                                                                    .bold,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        pw.Padding(
+                                                          padding: const pw
+                                                              .EdgeInsets.only(
+                                                              right: 20),
+                                                          child: pw.Center(
+                                                            child: pw.Text(
+                                                                controller
+                                                                        .selectedItems[(index +
+                                                                            (controller.selectedItems.length > 96
+                                                                                ? 131
+                                                                                : 70))]
+                                                                        .name ??
+                                                                    "",
+                                                                maxLines: 1),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     )
                                                   : pw.SizedBox(),
                                             );

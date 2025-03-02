@@ -483,6 +483,8 @@ class _AddDetailsState extends State<AddDetails> {
                                   controller.addEstimate();
                                 }
 
+                                controller.reorderList();
+
                                 await Get.to(
                                   () => const PdfView(),
                                   transition: Transition.rightToLeft,
