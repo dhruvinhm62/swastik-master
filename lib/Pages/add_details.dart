@@ -104,8 +104,7 @@ class _AddDetailsState extends State<AddDetails> {
                                   },
                                   child: Container(
                                     height: 55.h,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 18.w),
+                                    padding: EdgeInsets.symmetric(horizontal: 18.w),
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color: AppColors.primaryColor,
@@ -113,15 +112,11 @@ class _AddDetailsState extends State<AddDetails> {
                                       borderRadius: BorderRadius.circular(5.r),
                                     ),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           "Update Items",
-                                          style: TextStyle(
-                                              color: AppColors.primaryColor,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 18.sp),
+                                          style: TextStyle(color: AppColors.primaryColor, fontWeight: FontWeight.w600, fontSize: 18.sp),
                                         ),
                                         SizedBox(width: 5.w),
                                         const RotatedBox(
@@ -222,12 +217,9 @@ class _AddDetailsState extends State<AddDetails> {
                                 initialTime: itemController.morningTime1,
                               ).then(
                                 (value) {
-                                  final localizations =
-                                      MaterialLocalizations.of(context);
-                                  final formattedTimeOfDay =
-                                      localizations.formatTimeOfDay(value!);
-                                  return itemController
-                                      .updateMorning(formattedTimeOfDay);
+                                  final localizations = MaterialLocalizations.of(context);
+                                  final formattedTimeOfDay = localizations.formatTimeOfDay(value!);
+                                  return itemController.updateMorning(formattedTimeOfDay);
                                 },
                               );
                             },
@@ -264,12 +256,9 @@ class _AddDetailsState extends State<AddDetails> {
                                   initialTime: itemController.afternoonTime1,
                                 ).then(
                                   (value) {
-                                    final localizations =
-                                        MaterialLocalizations.of(context);
-                                    final formattedTimeOfDay =
-                                        localizations.formatTimeOfDay(value!);
-                                    return itemController
-                                        .updateAfternoon(formattedTimeOfDay);
+                                    final localizations = MaterialLocalizations.of(context);
+                                    final formattedTimeOfDay = localizations.formatTimeOfDay(value!);
+                                    return itemController.updateAfternoon(formattedTimeOfDay);
                                   },
                                 );
                               },
@@ -305,12 +294,9 @@ class _AddDetailsState extends State<AddDetails> {
                                 initialTime: itemController.eveningTime1,
                               ).then(
                                 (value) {
-                                  final localizations =
-                                      MaterialLocalizations.of(context);
-                                  final formattedTimeOfDay =
-                                      localizations.formatTimeOfDay(value!);
-                                  return itemController
-                                      .updateEvening(formattedTimeOfDay);
+                                  final localizations = MaterialLocalizations.of(context);
+                                  final formattedTimeOfDay = localizations.formatTimeOfDay(value!);
+                                  return itemController.updateEvening(formattedTimeOfDay);
                                 },
                               );
                             },
@@ -473,17 +459,15 @@ class _AddDetailsState extends State<AddDetails> {
                             onTap: () async {
                               FocusScope.of(context).unfocus();
                               if (controller.name.text.isEmpty) {
-                                AppSnackbar.errorSnackbar(
-                                    context, "Please enter name");
+                                AppSnackbar.errorSnackbar(context, "Please enter name");
                               } else {
                                 if (controller.selectionModeId != null) {
-                                  controller.updateEstimate(
-                                      controller.selectionModeId ?? "");
+                                  controller.updateEstimate(controller.selectionModeId ?? "");
                                 } else {
                                   controller.addEstimate();
                                 }
 
-                                controller.reorderList();
+                                // controller.reorderList();
 
                                 await Get.to(
                                   () => const PdfView(),
@@ -505,12 +489,8 @@ class _AddDetailsState extends State<AddDetails> {
                               ),
                               child: Center(
                                 child: Text(
-                                  !widget.isUpdate
-                                      ? "Generate PDF"
-                                      : "Update & Generate PDF",
-                                  style: TextStyle(
-                                      color: AppColors.whiteColor,
-                                      fontSize: 20.sp),
+                                  !widget.isUpdate ? "Generate PDF" : "Update & Generate PDF",
+                                  style: TextStyle(color: AppColors.whiteColor, fontSize: 20.sp),
                                 ),
                               ),
                             ),
@@ -528,24 +508,18 @@ class _AddDetailsState extends State<AddDetails> {
                                   onTap: () async {
                                     FocusScope.of(context).unfocus();
                                     if (controller.name.text.isEmpty) {
-                                      AppSnackbar.errorSnackbar(
-                                          context, "Please enter name");
+                                      AppSnackbar.errorSnackbar(context, "Please enter name");
                                     } else {
-                                      await controller
-                                          .updateEstimate(
-                                              controller.selectionModeId ?? "")
-                                          .then(
+                                      await controller.updateEstimate(controller.selectionModeId ?? "").then(
                                         (value) async {
                                           await controller.fetchEstimate();
                                           if (value) {
                                             if (!context.mounted) return;
-                                            AppSnackbar.snackbar(
-                                                context, "Details updated.");
+                                            AppSnackbar.snackbar(context, "Details updated.");
                                             Get.back();
                                           } else {
                                             if (!context.mounted) return;
-                                            AppSnackbar.errorSnackbar(context,
-                                                "Something went wrong please try again!");
+                                            AppSnackbar.errorSnackbar(context, "Something went wrong please try again!");
                                           }
                                         },
                                       );
@@ -560,9 +534,7 @@ class _AddDetailsState extends State<AddDetails> {
                                     child: Center(
                                       child: Text(
                                         "Update",
-                                        style: TextStyle(
-                                            color: AppColors.whiteColor,
-                                            fontSize: 20.sp),
+                                        style: TextStyle(color: AppColors.whiteColor, fontSize: 20.sp),
                                       ),
                                     ),
                                   ),
