@@ -103,10 +103,8 @@ class ItemController extends GetxController {
   }
 
   updateEstimateItems(EstimateModel model) {
-    selectedItems = items
-        .where((element) => model.selectedItems!.contains(element.id))
-        .toList();
-    reorderList();
+    selectedItems = items.where((element) => model.selectedItems!.contains(element.id)).toList();
+    // reorderList();
     update();
   }
 
@@ -126,17 +124,12 @@ class ItemController extends GetxController {
     loadPdfImages = true;
     update();
     final ByteData logoByte = await rootBundle.load("assets/images/logo1.png");
-    final ByteData scLogoByte =
-        await rootBundle.load("assets/images/sc_logo.png");
-    final ByteData addressByte =
-        await rootBundle.load("assets/images/address.png");
+    final ByteData scLogoByte = await rootBundle.load("assets/images/sc_logo.png");
+    final ByteData addressByte = await rootBundle.load("assets/images/address.png");
     final ByteData titleByte = await rootBundle.load("assets/images/title.png");
-    final ByteData image50Byte =
-        await rootBundle.load("assets/images/15days.png");
-    final ByteData upperImageByte =
-        await rootBundle.load("assets/images/upper_card.png");
-    final ByteData bottomImageByte =
-        await rootBundle.load("assets/images/bottom_card.png");
+    final ByteData image50Byte = await rootBundle.load("assets/images/15days.png");
+    final ByteData upperImageByte = await rootBundle.load("assets/images/upper_card.png");
+    final ByteData bottomImageByte = await rootBundle.load("assets/images/bottom_card.png");
     logoImage = (logoByte).buffer.asUint8List();
     scLogo = (scLogoByte).buffer.asUint8List();
     address = (addressByte).buffer.asUint8List();
@@ -216,11 +209,11 @@ class ItemController extends GetxController {
     update();
   }
 
-  reorderList() {
-    selectedItems
-        .sort((a, b) => (a.categoryName ?? "").compareTo(b.categoryName ?? ""));
-    update();
-  }
+  // reorderList() {
+  //   selectedItems
+  //       .sort((a, b) => (a.categoryName ?? "").compareTo(b.categoryName ?? ""));
+  //   update();
+  // }
 
   removeSelectedItems(ItemModel value) {
     selectedItems.remove(value);
@@ -251,9 +244,7 @@ class ItemController extends GetxController {
     try {
       loader = true;
       update();
-      DocumentReference itemDoc = await AppDataBase()
-          .kItemsCollection
-          .add({"created_at": Timestamp.now()});
+      DocumentReference itemDoc = await AppDataBase().kItemsCollection.add({"created_at": Timestamp.now()});
 
       final data = {
         "created_at": Timestamp.now(),
@@ -325,15 +316,11 @@ class ItemController extends GetxController {
 
   Future<void> fetchItems() async {
     try {
-      QuerySnapshot querySnapshot = await AppDataBase()
-          .kItemsCollection
-          .orderBy("name", descending: false)
-          .get();
+      QuerySnapshot querySnapshot = await AppDataBase().kItemsCollection.orderBy("name", descending: false).get();
       items = [];
       allItems = [];
       if (querySnapshot.docs.isNotEmpty) {
-        items = List<ItemModel>.from(querySnapshot.docs
-            .map((x) => ItemModel.fromJson(x.data() as Map<String, dynamic>)));
+        items = List<ItemModel>.from(querySnapshot.docs.map((x) => ItemModel.fromJson(x.data() as Map<String, dynamic>)));
         allItems = items;
       }
       update();
@@ -344,8 +331,7 @@ class ItemController extends GetxController {
 
   void filterItemList() {
     items = [];
-    if (selectedCategory == null ||
-        selectedCategory?.name == "All Categories") {
+    if (selectedCategory == null || selectedCategory?.name == "All Categories") {
       items = allItems;
     } else {
       for (var element in allItems) {
@@ -361,9 +347,7 @@ class ItemController extends GetxController {
     try {
       loader = true;
       update();
-      DocumentReference itemDoc = await AppDataBase()
-          .kEstimateCollection
-          .add({"created_at": Timestamp.now()});
+      DocumentReference itemDoc = await AppDataBase().kEstimateCollection.add({"created_at": Timestamp.now()});
 
       selectionModeId = itemDoc.id;
 
@@ -470,14 +454,10 @@ class ItemController extends GetxController {
 
   Future<void> fetchEstimate() async {
     try {
-      QuerySnapshot querySnapshot = await AppDataBase()
-          .kEstimateCollection
-          .orderBy("name", descending: false)
-          .get();
+      QuerySnapshot querySnapshot = await AppDataBase().kEstimateCollection.orderBy("name", descending: false).get();
 
       if (querySnapshot.docs.isNotEmpty) {
-        estimateList = List<EstimateModel>.from(querySnapshot.docs.map(
-            (x) => EstimateModel.fromJson(x.data() as Map<String, dynamic>)));
+        estimateList = List<EstimateModel>.from(querySnapshot.docs.map((x) => EstimateModel.fromJson(x.data() as Map<String, dynamic>)));
       } else {
         estimateList = [];
       }
